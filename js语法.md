@@ -347,3 +347,178 @@ JSON 的通常用法是从 web 服务器读取数据，然后在网页中显示�
 数据验证
 服务器端验证是由 web 服务器执行的，在输入被送往服务器之后
 客户端验证是由 web 浏览器执行的，在输入被送往 web 服务器之前
+
+#对象
+在 JavaScript 中，几乎“所有事物”都是对象。
+布尔是对象（如果用 new 关键词定义）
+数字是对象（如果用 new 关键词定义）
+字符串是对象（如果用 new 关键词定义）
+日期永远都是对象
+算术永远都是对象
+正则表达式永远都是对象
+数组永远都是对象
+函数永远都是对象
+对象永远都是对象
+所有 JavaScript 值，除了原始值，都是对象
+原始值指的是没有属性或方法的值。
+
+原始数据类型指的是拥有原始值的数据。
+JavaScript 定义了 5 种原始数据类型：
+- string
+- number
+- boolean
+- null
+- undefined
+
+for...in 语句遍历对象的属性
+
+    for (variable in object) {
+        要执行的代码
+    }
+for...in 循环中的代码块会为每个属性执行一次
+
+delete 关键词从对象中删除属性：
+
+    var person = {firstName:"Bill",     lastName:"Gates", age:62,   eyeColor:"blue"};
+    delete person.age;   // 或 delete person    ["age"];
+
+|属性|	值|
+|---|---|
+|firstName|	Bill|
+|lastName|	Gates|
+|age|	62|
+|eyeColor|	blue|
+|fullName|	function() {return this.|firstName + " " + this.lastName;}|
+
+##构造函数
+    function Person(first, last, age,   eyecolor) {
+        this.firstName = first;
+        this.lastName = last;
+        this.age = age;
+        this.eyeColor = eyecolor;
+        this.nationality = "English";
+    }
+
+#函数
+    var myFunction = function (a, b)    {return a * b};
+    var x = myFunction(4, 3);
+
+##自调用函数
+不需要其他变量来调用，定义完了就可以在运行时自己调用
+
+    (function () {
+        var x = "Hello!!";  //我会调用我    自己
+    })();
+JavaScript 函数都有属性和方法。
+arguments.length 会返回函数被调用时收到的参数数目
+toString() 方法以字符串返回函数
+##箭头函数
+箭头函数没有自己的 this。它们不适合定义对象方法。
+箭头函数未被提升。它们必须在使用前进行定义
+使用 const 比使用 var 更安全，因为函数表达式始终是常量值
+
+    const x = (x, y) => { return x * y };
+##函数参数
+函数定义不会为参数规定数据类型。
+函数不会对所传递的参数实行类型检查。
+函数不会检查所接收参数的数量
+
+    functionName(parameter1, parameter2,    parameter3) {
+        要执行的代码
+    }
+
+##call方法
+通过 call()，您能够使用属于另一个对象的方法
+本例调用 person 的 fullName 方法，并用于 person1
+
+    var person = {
+        fullName: function() {
+            return this.firstName + " " +   this.lastName;
+        }
+    }
+    var person1 = {
+        firstName:"Bill",
+        lastName: "Gates",
+    }
+    person.fullName.call(person1);  // 将返回 "Bill Gates"
+
+call() 方法可接受参数
+
+    var person = {
+      fullName: function(city, country) {
+        return this.firstName + " " + this. lastName + "," + city + "," +    country;
+      }
+    }
+    var person1 = {
+      firstName:"Bill",
+      lastName: "Gates"
+    }
+    person.fullName.call(person1, "Seattle", "USA");
+
+##apply方法
+apply() 方法，能够编写用于不同对象的方法
+
+    var person = {
+        fullName: function() {
+            return this.firstName + " " +   this.lastName;
+        }
+    }
+    var person1 = {
+        firstName: "Bill",
+        lastName: "Gates",
+    }
+    person.fullName.apply(person1);  // 将返回 "Bill Gates"
+###call与apply
+call() 方法分别接受参数
+apply() 方法接受数组形式的参数
+
+不通过关键词 var 创建的变量总是全局的，即使它们在函数中创建
+拥有相同名称的全局变量和局部变量是不同的变量。修改一个，不会改变其他
+
+#HTML DOM 
+HTML DOM 是关于如何获取、更改、添加或删除 HTML 元素的标准
+
+HTML DOM 方法：能够（在 HTML 元素上）执行的动作
+HTML DOM 属性：能够设置或改变的 HTML 元素的值
+在 DOM 中，所有 HTML 元素都被定义为对象
+
+    <html>
+    <body>
+    <p id="demo"></p>
+    <script>
+    document.getElementById("demo").innerHTML = "Hello World!";
+    </script>
+    </body>
+    </html>
+getElementById 是方法，innerHTML 是属性
+
+取元素内容最简单的方法是使用 innerHTML 属性
+innerHTML 属性可用于获取或改变任何 HTML 元素，包括 \<html> 和 \<body>
+
+document.getElementById(id).onclick = function(){code}	向 onclick 事件添加事件处理程序
+
+##查找HTML元素方法
+- 通过 id 查找 HTML 元素
+- 通过标签名查找 HTML 元素
+- 通过类名查找 HTML 元素
+- 通过 CSS 选择器查找 HTML 元素
+- 通过 HTML 对象集合查找 HTML 元素
+查找 "main" 中所有 <p> 元素
+    var x = document.getElementById("main");
+    var y = x.getElementsByTagName("p"); 
+查找匹配指定 CSS 选择器（id、类名、类型、属性、属性值等等）的所有 HTML 元素
+    var x = document.querySelectorAll("p.intro");
+
+document.write() 可用于直接写入 HTML 输出流;不要在文档加载后使用 document.write()，会覆盖文档
+修改 \<img> 元素的 src 属性的值
+
+    <img id="myImage" src="smiley.gif">
+    <script>
+    document.getElementById("myImage").src = "landscape.jpg";
+    </script>
+##css
+
+    <p id="p2">Hello World!</p>
+    <script>
+    document.getElementById("p2").style.color = "blue";
+    </script>
