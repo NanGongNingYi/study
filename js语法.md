@@ -522,3 +522,103 @@ document.write() 可用于直接写入 HTML 输出流;不要在文档加载后�
     <script>
     document.getElementById("p2").style.color = "blue";
     </script>
+
+##动画
+
+    function myMove() {
+        var elem =  document.getElementById("animate"); 
+        var pos = 0;
+        var id = setInterval(frame, 5);//每5秒执行一次
+         function frame() {
+            if (pos ==  350) {
+                 clearInterval(id);//停止setInterval
+            } else {
+                 pos++; 
+                 elem.style.top = pos + 'px'; 
+                 elem.style.left = pos + 'px'; 
+            }
+         }
+    }
+
+
+    <p>请点击“试一试”按钮，以执行 displayDate() 函数。</p>
+    <button id="myBtn">试一试</button>
+    <p id="demo"></p>
+    <script>//这里displayDate为什么加了括号就直接显示时间了？
+    document.getElementById("myBtn").onclick = displayDate;
+    function displayDate() {
+      document.getElementById("demo").innerHTML = Date();
+    }
+    </script>
+
+###事件监听器
+    element.addEventListener(event, function, useCapture);
+第一个参数是事件的类型（比如 "click" 或 "mousedown"）
+第二个参数是当事件发生时我们需要调用的函数
+第三个参数是布尔值，指定使用事件冒泡还是事件捕获，此参数是可选的
+
+向相同元素添加多个事件处理程序
+addEventListener() 方法允许您向相同元素添加多个事件，同时不覆盖已有事件
+可以将事件监听器添加到任何 HTML DOM 对象上，比如 HTML 元素、HTML 对象、window 对象或其他支持事件的对象，比如 xmlHttpRequest 对象
+
+在 HTML DOM 中有两种事件传播的方法：冒泡和捕获。
+
+事件传播是一种定义当发生事件时元素次序的方法。假如 \<div> 元素内有一个 \<p>，然后用户点击了这个 \<p> 元素，应该首先处理哪个元素“click”事件？
+在冒泡中，最内侧元素的事件会首先被处理，然后是更外侧的：首先处理 \<p> 元素的点击事件，然后是 \<div> 元素的点击事件
+在捕获中，最外侧元素的事件会首先被处理，然后是更内侧的：首先处理 \<div> 元素的点击事件，然后是 \<p> 元素的点击事件
+
+在 addEventListener() 方法中，通过使用“useCapture”参数来规定传播类型:
+addEventListener(event, function, useCapture)
+默认值是 false，将使用冒泡传播，如果该值设置为 true，则事件使用捕获传播
+
+removeEventListener() 方法会删除已通过 addEventListener() 方法附加的事件处理程序
+
+##节点
+
+    <title id="demo">DOM 教程</title> 
+（上面例子中的）元素节点 \<title> 不包含文本
+它包含了值为 "DOM 教程" 的文本节点
+文本节点的值能够通过节点的 innerHTML 属性进行访问
+访问 innerHTML 属性等同于访问首个子节点的 nodeValue
+
+    var myTitle = document.getElementById("demo").firstChild.nodeValue;
+innerHTML 可以取回 HTML 元素的内容
+
+###nodeName 属性规定节点的名称
+nodeName 是只读的
+元素节点的 nodeName 等同于标签名
+属性节点的 nodeName 是属性名称
+文本节点的 nodeName 总是 #text
+文档节点的 nodeName 总是 #document
+nodeName 总是包含 HTML 元素的大写标签名
+
+nodeValue 属性规定节点的值
+元素节点的 nodeValue 是 undefined
+文本节点的 nodeValue 是 文本文本
+属性节点的 nodeValue 是 属性值
+
+###创建节点
+这段代码创建了一个新的\ <p> 元素：
+var para = document.createElement("p");
+如需向 \<p> 元素添加文本，则必须首先创建文本节点。这段代码创建了一个文本节点：
+var node = document.createTextNode("这是一个新段落");
+然后您需要向 \<p> 元素追加这个文本节点：
+para.appendChild(node);
+最后您需要向已有元素追加这个新元素
+这段代码查找一个已有的元素：
+var element = document.getElementById("div1");
+这段代码向这个已有的元素追加新元素：
+element.appendChild(para);
+
+appendChild() 方法，追加新元素作为父的最后一个子
+
+找到你想要删除的子，并利用其 parentNode 属性找到父
+var child = document.getElementById("p1");
+child.parentNode.removeChild(child);
+
+HTMLCollection 是 HTML 元素的集合
+NodeList 是文档节点的集合
+NodeList 和 HTML 集合几乎完全相同
+HTMLCollection 和 NodeList 对象都是类数组的对象列表（集合）
+访问 HTMLCollection 项目，可以通过它们的名称、id 或索引号
+访问 NodeList 项目，只能通过它们的索引号
