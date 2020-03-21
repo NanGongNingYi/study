@@ -622,3 +622,114 @@ NodeList 和 HTML 集合几乎完全相同
 HTMLCollection 和 NodeList 对象都是类数组的对象列表（集合）
 访问 HTMLCollection 项目，可以通过它们的名称、id 或索引号
 访问 NodeList 项目，只能通过它们的索引号
+
+#window对象
+所有浏览器都支持 window 对象，它代表浏览器的窗口
+全局变量是 window 对象的属性
+全局函数是 window 对象的方法
+
+JavaScript 有三种类型的弹出框：
+警告框：window.alert() 方法可以不带 window 前缀来写
+确认框：window.confirm() 方法可以不带 window 前缀来编写
+提示框：window.prompt() 方法可以不带 window 前缀来编写
+
+#JSON
+JSON 是一种存储和交换数据的语法
+当数据在浏览器与服务器之间进行交换时，这些数据只能是文本
+JSON 属于文本，并且我们能够把任何 JavaScript 对象转换为 JSON，然后将 JSON 发送到服务器
+我们也能把从服务器接收到的任何 JSON 转换为 JavaScript 对象
+为什么使用 JSON？
+因为 JSON 格式仅仅是文本，它能够轻松地在服务器浏览器之间传输，并用作任何编程语言的数据格式
+JSON 语法是 JavaScript 语法的子集
+数据在名称/值对中
+数据由逗号分隔
+花括号容纳对象
+方括号容纳数组
+
+在 JSON 中，键必须是字符串，由双引号包围：
+JSON
+{ "name":"Bill Gates" }
+在 JavaScript 中，键可以是字符串、数字或标识符名称：
+JavaScript
+{ name:"Bill Gates" }
+
+在 JSON 中，字符串值必须由双引号编写：
+JSON
+{ "name":"Bill Gates" }
+在 JavaScript 中，您可以书写使用双引号或单引号的字符串值：
+JavaScript
+{ name:'Bill Gates' }
+JSON 中的值可以是对象
+JSON 中的值可以是数组
+
+JSON 的常规用途是同 web 服务器进行数据传输
+在从 web 服务器接收数据时，数据永远是字符串
+通过 JSON.parse() 解析数据，这些数据会成为 JavaScript 对象
+
+使用 JavaScript 函数 JSON.parse() 把文本转换为 JavaScript 对象：
+var obj = JSON.parse('{ "name":"Bill Gates", "age":62, "city":"Seattle"}');
+
+使用 XMLHttpRequest 从服务器获取数据
+
+通过 JSON.stringify() 把 JavaScript 对象转换为字符串
+
+通过 for-in 
+遍历对象属性
+myObj =  { "name":"Bill Gates", "age":62, "car":null };
+for (x in myObj) {
+   document.getElementById("demo").innerHTML  += x;
+}
+使用括号标记法来访问对象属性值
+myObj =  { "name":"Bill Gates", "age":62, "car":null };
+for (x in myObj) {
+   document.getElementById("demo").innerHTML  += myObj[x];
+}
+
+PHP 是服务器端编程语言，应该用于只能由服务器执行的操作，比如访问数据库
+
+设置元素的 HTML 内容
+var myElement.innerHTML = "<p>Hello World</p>";
+获取元素的 HTML 内容
+var content = myElement.innerHTML;
+
+#AJAX
+AJAX 是一种从网页访问 Web 服务器的技术
+用AJAX可以实现以下操作：
+不刷新页面更新网页
+在页面加载后从服务器请求数据
+在页面加载后从服务器接收数据
+在后台向服务器发送数据
+
+AJAX 组合了：
+浏览器内建的 XMLHttpRequest 对象（从 web 服务器请求数据）
+JavaScript 和 HTML DOM（显示或使用数据）
+
+如何工作：
+- 网页中发生一个事件（页面加载、按钮点击）
+- 由 JavaScript 创建 XMLHttpRequest 对象
+- XMLHttpRequest 对象向 web 服务器发送请求
+- 服务器处理该请求
+- 服务器将响应发送回网页
+- 由 JavaScript 读取响应
+- 由 JavaScript 执行正确的动作（比如更新页面）
+
+Ajax 的核心是 XMLHttpRequest 对象
+**XMLHttpRequest 对象用于同幕后服务器交换数据**
+创建 XMLHttpRequest 对象：
+如果支持，创建 XMLHttpRequest 对象，如果不支持，则创建 ActiveX 对象
+
+    var xhttp;
+    if (window.XMLHttpRequest) {
+        xhttp = new XMLHttpRequest();
+        } else {
+        // code for IE6, IE5
+         xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+尝试加载的网页和 XML 文件都必须位于相同服务器上
+
+异步 - ture 还是 false？
+通过异步发送，JavaScript 不必等待服务器响应，而是可以：
+xhttp.open("GET", "ajax_test.asp", true);
+在等待服务器响应时执行其他脚本
+当响应就绪时处理响应
+
